@@ -3,11 +3,13 @@
 
     <string name="app_name">WeatherForecast</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_forecast">Forecast</string>
     <string name="enter_city_text">Enter the city</string>
     <string name="ok_button_text">OK</string>
     <string name="weather_image_description">The Weather Condition Image</string>
+    <string name="title_activity_weather_data_details">WeatherDataDetails</string>
+    <string name="cityname_text">City</string>
+    <string name="temperature_text">Temperature</string>
+    <string name="week_weather_info">Weather information of other days</string>
     
 
 </resources>

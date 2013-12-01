@@ -40,7 +40,9 @@ public class WeatherDataXmlParser {
 			String name = parser.getName();
 			// Starts by looking for the time tag
 			if (name.equals("time")) {
-				weatherDatas.add(readEntry(parser));
+
+				WeatherData weatherdata = readEntry(parser);
+				weatherDatas.add(weatherdata);
 
 			}
 		}
@@ -120,9 +122,9 @@ public class WeatherDataXmlParser {
 	private String readWindDescription(XmlPullParser parser)
 			throws IOException, XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, ns, "windSpeed");
-		String symbol = readWindName(parser);
+		String windSpeed = readWindName(parser);
 		parser.require(XmlPullParser.END_TAG, ns, "windSpeed");
-		return symbol;
+		return windSpeed;
 	}
 
 	// Processes summary tags in the weatherdata.

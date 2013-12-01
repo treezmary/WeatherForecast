@@ -5,9 +5,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
-import com.example.weatherforecast.WeatherDataXmlParser.WeatherData;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -24,8 +23,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.weatherforecast.WeatherDataXmlParser.WeatherData;
 
 public class MainActivity extends Activity {
 	public static final String WIFI = "Wi-Fi";
@@ -48,7 +49,8 @@ public class MainActivity extends Activity {
 
 	EditText city;
 	Button result;
-	ImageView bgImageView;
+	TextView temperature;
+	//ImageView bgImageView;
 
 
 
@@ -64,7 +66,8 @@ public class MainActivity extends Activity {
 
 		city = (EditText) findViewById(R.id.cityEditText);
 		result = (Button) findViewById(R.id.okButton);
-		bgImageView = (ImageView) findViewById(R.id.imageView);
+		temperature = (TextView)findViewById(R.id.textView1);
+		//bgImageView = (ImageView) findViewById(R.id.imageView);
 
 		result.setOnClickListener(new OnClickListener() {
 
@@ -79,8 +82,11 @@ public class MainActivity extends Activity {
 							"Enter a city name", Toast.LENGTH_LONG).show();
 					return;
 				} else {
-
-					loadPage(tempStr);
+                     loadPage(tempStr);
+                     Intent intent = new Intent(MainActivity.this,WeatherDataDetails.class);
+                     intent.putExtra("cityName",tempStr );
+              
+                     startActivity(intent);
 				}
 			}
 		});
@@ -171,10 +177,14 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(List<WeatherData> weatherData) {
- 
-        }
-    }
+		protected void onPostExecute(List<WeatherData> weatherDataList) {
+        	  WeatherData weatherdata = weatherDataList.get(0);
+        	  Toast.makeText(getApplicationContext(), weatherdata.temperature, Toast.LENGTH_LONG).show();
+        	
+		}
+
+	}
+    
 
     // Uploads XML from stackoverflow.com, parses it, and combines it with
     // HTML markup. Returns HTML string.
